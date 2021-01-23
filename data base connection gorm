@@ -1,0 +1,25 @@
+import (
+  "gorm.io/driver/clickhouse"
+  "gorm.io/gorm"
+)
+
+func main() {
+  dsn := "tcp:
+  db, err := gorm.Open(clickhouse.Open(dsn), &gorm.Config{})
+
+
+  db.AutoMigrate(&User{})
+  
+  db.Set("gorm:table_options", "ENGINE=Distributed(cluster, default, hits)").AutoMigrate(&User{})
+
+ 
+  db.Create(&user)
+
+
+  db.Find(&user, "id = ?", 10)
+
+
+  var users = []User{user1, user2, user3}
+  db.Create(&users)
+  
+}
